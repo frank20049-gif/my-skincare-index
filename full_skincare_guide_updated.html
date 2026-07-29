@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人保養品全圖鑑與一週保養流程指南</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #319795;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --highlight-bg: #ebf8ff;
+            --warning-bg: #fffaf0;
+            --warning-border: #dd6b20;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            line-height: 1.7;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 24px 12px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #2b6cb0, #1a365d);
+            color: white;
+            padding: 36px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .category-title {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 10px 16px;
+            border-radius: 6px 6px 0 0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 16px;
+            background-color: var(--border-color);
+            padding: 16px;
+            border-radius: 0 0 6px 6px;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .product-id {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .product-name {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .product-details {
+            font-size: 0.9rem;
+        }
+
+        .product-details p {
+            margin-bottom: 6px;
+        }
+
+        .product-details strong {
+            color: #4a5568;
+        }
+
+        .explanation-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .explanation-card h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .product-code {
+            font-weight: bold;
+            color: var(--secondary-color);
+            background-color: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .tag-morning {
+            background-color: #feebc8;
+            color: #7b341e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tag-night {
+            background-color: #e9d8fd;
+            color: #44337a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Table Design */
+        .routine-table-container {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table.routine-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        table.routine-table th {
+            background-color: #edf2f7;
+            color: var(--primary-color);
+            padding: 12px 10px;
+            border-bottom: 2px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        table.routine-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        table.routine-table tr:hover {
+            background-color: #f7fafc;
+        }
+
+        .note-box {
+            background-color: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+        }
+
+        .note-box strong {
+            color: #c05621;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px 6px;
+            }
+            .section-card {
+                padding: 16px;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            table.routine-table th, table.routine-table td {
+                padding: 8px 6px;
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>個人保養品全圖鑑與一週保養流程指南</h1>
+        <p>完整產品解析 ✕ 個人化保養流程 ✕ 產品編號名稱對照表</p>
+    </header>
+
+    <!-- 第一部分：全產品目錄 -->
+    <div class="section-card">
+        <h2 class="section-title">第一部分：所有產品名稱、成分與功效總整理（#01 ~ #38）</h2>
+
+        <!-- 分類 1 -->
+        <h3 class="category-title">一、臉部基礎保養（精華/乳霜/凝膠）</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#01</span>
+                    <div class="product-name">Curél 潤浸保濕乳霜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>類神經醯胺修護成分、桉樹精華、尿囊素</p>
+                    <p><strong>主要功效：</strong>深層滋潤角質層、修護屏障、鎖水保濕，舒緩乾燥泛紅。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#02</span>
+                    <div class="product-name">Dr.G 補骨脂酚毛孔緊緻精華</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>補骨脂酚 1.5%、PDRN、菸鹼醯胺</p>
+                    <p><strong>主要功效：</strong>溫和抗老、緊緻毛孔、促進修護與提升彈力。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#03</span>
+                    <div class="product-name">QUALITY 1st Derma Laser 壬二酸精華液</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高濃度壬二酸 (杜鵑花酸)</p>
+                    <p><strong>主要功效：</strong>平衡皮脂分泌、通暢毛孔、淡化痘印並改善瑕疵。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#04</span>
+                    <div class="product-name">QUALITY 1st Derma Laser A醇+菸鹼醯胺精華液</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>A醇 (Retinol)、高濃度菸鹼醯胺</p>
+                    <p><strong>主要功效：</strong>密集抗老撫紋、促進代謝、提亮膚色與緊緻毛孔。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#05</span>
+                    <div class="product-name">QUALITY 1st Derma Laser 密集維他命C精華液</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高濃度複合維他命C</p>
+                    <p><strong>主要功效：</strong>極速提亮、抑制黑色素生成、改善暗沉與抗氧化。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#06</span>
+                    <div class="product-name">Torriden 補水玻尿酸精華</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>5重複合低分子玻尿酸、泛醇 (B5)、尿囊素</p>
+                    <p><strong>主要功效：</strong>深層水潤補水、舒緩缺水乾燥，清爽不黏膩。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#07</span>
+                    <div class="product-name">Olive Young 蘆薈舒緩保濕凝膠</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>庫拉索蘆薈葉萃取物</p>
+                    <p><strong>主要功效：</strong>鎮靜降溫、曬後修護與補充水分（全身適用）。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#08</span>
+                    <div class="product-name">Dr.Reju Advanced PDRN 潤澤修護組</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高濃度 PDRN 修護因子、舒緩因子</p>
+                    <p><strong>主要功效：</strong>包含面霜與唇部精華，密集修護乾裂雙唇與乾燥肌膚。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#09</span>
+                    <div class="product-name">AESTURA 障壁保濕神經醯胺膠囊霜組</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高密度專利神經醯胺膠囊 (DermaON®)</p>
+                    <p><strong>主要功效：</strong>修護受損角質屏障、極致鎖水，適合乾性與敏感肌。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#10</span>
+                    <div class="product-name">celimax A醇煥膚毛孔緊緻精華</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>視黃醛 0.1%、維生素B5 1%、MATRIXYL® 3000</p>
+                    <p><strong>主要功效：</strong>高效抗老、緊緻毛孔、撫平細紋與維持水潤。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#11</span>
+                    <div class="product-name">RXme Juvekle 聚雙旋乳酸緊緻霜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>PDLLA 10,000 ppm、抗老胜肽</p>
+                    <p><strong>主要功效：</strong>刺激膠原協同作用、改善鬆弛、充盈凹陷與恢復彈力。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#12</span>
+                    <div class="product-name">Hanmi PRO-CALM 維他命K褪紅修護霜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>脂質體化維他命K、三重益生菌、蘆薈萃取</p>
+                    <p><strong>主要功效：</strong>促進微循環、改善瘀青泛紅、浮腫與術後舒緩修護。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#13</span>
+                    <div class="product-name">WELLAGE 藍色微導玻尿酸保濕精華</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>100%純度微導玻尿酸、玻尿酸水、B5、PDRN</p>
+                    <p><strong>主要功效：</strong>直達肌底強效補水，拯救內乾外油與乾繃狀態。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類 2 -->
+        <h3 class="category-title">二、面膜與局部深層護理</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#14</span>
+                    <div class="product-name">Biodance 生物膠原蛋白深層實感凝膠面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>超低分子膠原蛋白、低分子玻尿酸、益生菌發酵液</p>
+                    <p><strong>主要功效：</strong>緊緻毛孔、提升彈力與深層注入膠原光澤。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#15</span>
+                    <div class="product-name">MEDIHEAL 積雪草痕跡屏障修護面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高純度積雪草苷 (98%)、低分子玻尿酸</p>
+                    <p><strong>主要功效：</strong>敏弱舒緩、集中修護受損屏障與淡化色素痕跡。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#16</span>
+                    <div class="product-name">MEDIHEAL 茶樹舒緩鎮靜面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>茶樹萃取物 (12,000 ppm)、4-松油醇</p>
+                    <p><strong>主要功效：</strong>控油舒緩、平衡皮脂分泌與急救鎮靜痘痘泛紅。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#17</span>
+                    <div class="product-name">MEDIHEAL 玫瑰 PDRN 毛孔光澤面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>英國白玫瑰提取物、玫瑰 PDRN 因子</p>
+                    <p><strong>主要功效：</strong>改善暗沉與粗糙毛孔，提亮膚色並賦予健康光澤。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#18</span>
+                    <div class="product-name">Torriden DIVE IN 玻尿酸深層補水面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>5D複合低分子玻尿酸、尿囊素、維生素B5</p>
+                    <p><strong>主要功效：</strong>急救高保濕，迅速舒緩乾燥緊繃，恢復水嫩。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#19</span>
+                    <div class="product-name">numbuzin 5號 穀胱甘肽維他命C濃縮面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>穀胱甘肽、維生素C複合成分、煙醯胺</p>
+                    <p><strong>主要功效：</strong>強效美白淡斑、密集抗氧化，改善痘印與暗沉。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#20</span>
+                    <div class="product-name">Dr.Reju-All 高效PDRN煥活修護面膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>PDRN (1,200 ppm)、六重胜肽、積雪草+TECA</p>
+                    <p><strong>主要功效：</strong>密集修護抗老、提升肌膚彈力與強化屏障。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#21</span>
+                    <div class="product-name">beplain 綠豆深層清潔毛孔泥膜</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>綠豆粉/萃取物、高嶺土泥、溫和酵素</p>
+                    <p><strong>主要功效：</strong>3分鐘深層清潔、吸附皮脂、清理黑頭與老廢角質。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類 3 -->
+        <h3 class="category-title">三、臉部清潔、防曬與藥用祛痘</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#22</span>
+                    <div class="product-name">Round Lab 樺樹水分防曬乳</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>樺樹汁液、複合玻尿酸、SPF 50+ PA++++</p>
+                    <p><strong>主要功效：</strong>高係數防曬兼具強效補水，質地清爽不白泛。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#23</span>
+                    <div class="product-name">Torriden DIVE IN 弱酸性玻尿酸潔顏乳</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>5D複合低分子玻尿酸、弱酸性潔膚因子</p>
+                    <p><strong>主要功效：</strong>溫和清潔髒污油脂，洗後維持肌膚水分不緊繃。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#24</span>
+                    <div class="product-name">Round Lab 1025 獨島溫和潔顏乳</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>深層海洋水、複合玻尿酸、洋甘菊/積雪草</p>
+                    <p><strong>主要功效：</strong>密實微氣泡溫和帶走污垢，維持油水平衡。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#25</span>
+                    <div class="product-name">beplain 綠豆弱酸性毛孔潔面乳</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>綠豆萃取物、綠豆籽粉、胺基酸洗劑</p>
+                    <p><strong>主要功效：</strong>溫和物理角質調理、洗淨過剩皮脂與毛孔髒污。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#26</span>
+                    <div class="product-name">東亞製藥 Aclearin 水楊酸祛痘凝膠</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>2% 水楊酸 (BHA)、茶樹精油</p>
+                    <p><strong>主要功效：</strong>溶解皮脂與老廢角質，針對黑頭、白頭及閉口粉刺。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類 4 -->
+        <h3 class="category-title">四、髮頭皮、足部與身體護理</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#27</span>
+                    <div class="product-name">LABO-H 頭皮修護健髮噴霧</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>專利益生菌發酵產物、神經醯胺、PDRN、生物素</p>
+                    <p><strong>主要功效：</strong>平衡頭皮微生態、強化屏障、舒緩並強健髮根。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#28</span>
+                    <div class="product-name">抗菌美容香皂</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>抗菌活性成分、雪亞脂、尤加利葉油</p>
+                    <p><strong>主要功效：</strong>身體與手部潔淨抑菌，滋潤洗後不乾澀。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#29</span>
+                    <div class="product-name">東生製藥 YouGreen F 25%高濃度尿素軟膏</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>25% 高濃度尿素 (Urea)</p>
+                    <p><strong>主要功效：</strong>強效軟化角質、深度滋潤，修護腳跟乾裂與硬皮。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#30</span>
+                    <div class="product-name">SUNGBOON EDITOR 乳木果油嬰兒足部棒</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>高濃度乳木果油、植物滋養油脂</p>
+                    <p><strong>主要功效：</strong>免沾手膏棒設計，及時滋養乾裂足底，恢復柔嫩。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#31</span>
+                    <div class="product-name">DASHU 霧面超強定型噴霧</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>竹林植物萃取、速乾定型聚合物</p>
+                    <p><strong>主要功效：</strong>長時間持久定型，打造不黏膩的自然霧面髮型。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#32</span>
+                    <div class="product-name">DASHU / SILK ROAD 男士隱形胸貼</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>醫規低敏透氣膠體、微孔透氣無紡布</p>
+                    <p><strong>主要功效：</strong>防止衣物防凸點尷尬，防水防汗、邊緣服貼自然。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類 5 -->
+        <h3 class="category-title">五、口腔保健與個人衛生用品</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#33</span>
+                    <div class="product-name">Vussen S 舒敏護理牙膏</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>磷酸三鈣 (TCP)、自然舒緩成分</p>
+                    <p><strong>主要功效：</strong>修復牙齒表面微孔，改善冷熱酸甜引起的敏感酸痛。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#34</span>
+                    <div class="product-name">잇치 蜂膠牙齦護理藥用牙膏</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>天然蜂膠萃取物、消炎止血成分</p>
+                    <p><strong>主要功效：</strong>藥用護理，改善牙齦出血、腫脹與牙周不適。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#35</span>
+                    <div class="product-name">Ladens / 韓國清潔刮舌板系列</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>柔軟 TPE 彈性體 / 食品級樹脂</p>
+                    <p><strong>主要功效：</strong>溫和清除舌苔與積聚細菌，消除口臭來源。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#36</span>
+                    <div class="product-name">Garglin 勁爽薄荷口腔清新噴霧</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>薄荷醇、植物抑菌成分</p>
+                    <p><strong>主要功效：</strong>隨身速效消除口腔異味，保持長效清新好氣味。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分類 6 -->
+        <h3 class="category-title">六、內服保健食品</h3>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#37</span>
+                    <div class="product-name">LACTO-FIT 核心強化益生菌</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>LACTO-5X™ 複合益生菌 (40億CFU)、鋅、脯胺酸</p>
+                    <p><strong>主要功效：</strong>維護腸道微生態、幫助消化，鋅可維持正常免疫機能。</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <span class="product-id">#38</span>
+                    <div class="product-name">CJ WELLCARE MelaMate 植物性褪黑激素軟糖</div>
+                </div>
+                <div class="product-details">
+                    <p><strong>核心成分：</strong>開心果萃取植物性褪黑激素 (1mg)、複合水果濃縮汁</p>
+                    <p><strong>主要功效：</strong>輔助調節生物鐘、幫助入睡與提升夜間休息品質。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二部分：流程評估與去角質/白天流程解答 -->
+    <div class="section-card">
+        <h2 class="section-title">第二部分：流程重點答疑與白天完整步驟</h2>
+        
+        <div class="explanation-card">
+            <h3>1. 關於「禮拜天要去角質嗎？」的專業解答</h3>
+            <p><strong>答案是：不需要額外做強效去角質！</strong>原因如下：</p>
+            <ul>
+                <li>您在一、三、五晚上使用的 <span class="product-code">#04 A醇精華</span> 本身就具備促進角質代謝更新的效果。</li>
+                <li>若在禮拜天又使用強效磨砂或酸類去角質，很容易導致<strong>「過度去角質」</strong>，引發泛紅、刺痛或肌膚屏障受損。</li>
+                <li><strong>禮拜天的正確做法：</strong>這一天是肌膚的「休息修護日」。如果當天覺得粉刺較多、毛孔悶黏，可以使用溫和的 <span class="product-code">#21 beplain 綠豆泥膜</span>（敷 3 分鐘吸附油脂），洗淨後直接敷上保濕或修護面膜（如 <span class="product-code">#15 積雪草面膜</span> 或 <span class="product-code">#18 玻尿酸面膜</span>），補水鎮靜即可！</li>
+            </ul>
+        </div>
+
+        <div class="explanation-card">
+            <h3>2. 補齊「白天」完整保養步驟（含產品編號與最佳順序）</h3>
+            <p>白天的核心目標是<strong>「控油調理＋抗氧化＋日間防曬保護」</strong>，因應您在白天使用 <span class="product-code">#03 壬二酸精華</span>，最佳塗抹順序調整如下：</p>
+            <ol>
+                <li><strong>步驟 1【溫和清潔】：</strong>使用 <span class="product-code">#23 Torriden 弱酸性潔顏乳</span> 或 <span class="product-code">#24 獨島潔顏乳</span>（若起床膚況不油，用清水沖洗即可）。</li>
+                <li><strong>步驟 2【深層補水】：</strong>塗抹 <span class="product-code">#06 Torriden 補水玻尿酸精華</span>（若極乾可換 <span class="product-code">#13 WELLAGE 藍色玻尿酸</span>），充盈肌膚角質層水分。</li>
+                <li><strong>步驟 3【控油/毛孔調理】：</strong>塗抹 <span class="product-code">#03 QUALITY 1st 壬二酸精華</span>（先作用於毛孔皮脂，調理粉刺並避免後續起屑）。</li>
+                <li><strong>步驟 4【核心抗氧】：</strong>塗抹 <span class="product-code">#05 QUALITY 1st VCMAX 維他命C精華</span>，提亮膚色並對抗日間自由基。</li>
+                <li><strong>步驟 5【鎖水與日間防禦】：</strong>先擦薄薄一層 <span class="product-code">#01 Curél 保濕乳霜</span> 鎖水，最後務必擦上足量的 <span class="product-code">#22 Round Lab 樺樹水分防曬乳</span>。</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 第三部分：白話詳細解說替換機制 -->
+    <div class="section-card">
+        <h2 class="section-title">第三部分：用白話文看懂：「進階替換」與「調理替換」</h2>
+        
+        <div class="explanation-card">
+            <h3>1. 白天疊加「#03 壬二酸」與「#05 維他命C」的使用提醒</h3>
+            <p>將 <span class="product-code">#03 壬二酸</span> 放在白天使用非常適合控油與抗痘，但請特別注意：</p>
+            <ul>
+                <li><strong>順序調換：</strong>請記得先擦 <span class="product-code">#03 壬二酸</span> 吸收後，再擦 <span class="product-code">#05 維他命C</span>。</li>
+                <li><strong>防曬務必到位：</strong>壬二酸加速代謝時角質較嫩，日間請務必擦足 <span class="product-code">#22 樺樹防曬乳</span>。</li>
+                <li><strong>耐受度觀察：</strong>若雙酸/雙功效疊加導致局部刺痛或乾燥，可將 <span class="product-code">#03 壬二酸</span> 移回二、四、六晚間使用。</li>
+            </ul>
+        </div>
+
+        <div class="explanation-card">
+            <h3>2. 什麼是「進階替換」？（想讓抗老/緊緻效果更好時）</h3>
+            <p>您手上的 <span class="product-code">#04 QUALITY 1st A醇精華</span> 是基礎抗老產品。當您這瓶用完，或是覺得肌膚已經適應、想追求更明顯的抗老與毛孔緊緻時：</p>
+            <ul>
+                <li><strong>進階替換目標：</strong>在一、三、五晚上，把 <span class="product-code">#04 A醇</span> 換成 <span class="product-code">#10 celimax 視黃醛精華</span>。</li>
+                <li><strong>為什麼：</strong>視黃醛（Retinal）在皮膚轉化成有效成分的速度比 A醇（Retinol）更快，抗老緊緻毛孔的效果更強！</li>
+                <li><strong>敏感備用選項：</strong>若某陣子換季皮膚較敏感刺痛，可將 <span class="product-code">#04</span> 換成 <span class="product-code">#02 Dr.G 補骨脂酚精華</span>（極溫和的植物性抗老）。</li>
+            </ul>
+        </div>
+
+        <div class="explanation-card">
+            <h3>3. 其他功能型產品的替換定位（#08、#11、#12、#13、#26）</h3>
+            <ul>
+                <li><span class="product-code">#08 Dr.Reju-All PDRN</span>：二、四、六晚間作為修護主角。</li>
+                <li><span class="product-code">#13 WELLAGE 藍色玻尿酸</span>：當天皮膚極度乾燥時，替換 <span class="product-code">#06</span> 作為高階補水。</li>
+                <li><span class="product-code">#12 Hanmi 維他命K褪紅霜</span>：換季泛紅、刷酸過敏或眼周浮腫時，在乳霜前薄塗泛紅處。</li>
+                <li><span class="product-code">#11 RXme 聚雙旋乳酸緊緻霜</span>：覺得臉部鬆弛或法令紋明顯時，可替代 <span class="product-code">#01</span> 或局部加強塗抹。</li>
+                <li><span class="product-code">#26 水楊酸祛痘凝膠</span>：局部紅腫大痘或頑固粉刺，保養最後一步點塗急救。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 第四部分：一週保養日程推薦表 -->
+    <div class="section-card">
+        <h2 class="section-title">第四部分：一週保養日程推薦表（全產品編號＋名稱詳細標示）</h2>
+        <div class="routine-table-container">
+            <table class="routine-table">
+                <thead>
+                    <tr>
+                        <th>時段 / 星期</th>
+                        <th>步驟 1 (清潔)</th>
+                        <th>步驟 2 (補水打底)</th>
+                        <th>步驟 3 (日間控油 / 夜間核心精華)</th>
+                        <th>步驟 4 (日間抗氧 / 夜間鎖水)</th>
+                        <th>步驟 5 (日間防曬 / 局部急救)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag-morning">每日早晨</span></td>
+                        <td>清水 或<br>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#03 QUALITY 1st 壬二酸精華<br><small style="color:#2b6cb0;">(優先作用於毛孔控油)</small></td>
+                        <td>#05 QUALITY 1st 維他命C精華<br><small style="color:#718096;">(擦完後薄塗 #01 Curél 乳霜)</small></td>
+                        <td>#22 Round Lab 樺樹防曬乳<br><small style="color:#e53e3e;">(有痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期一 (抗老)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#04 QUALITY 1st A醇精華<br><small style="color:#2b6cb0;">(進階可換 #10 celimax 視黃醛)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(鬆弛可換 #11 RXme 緊緻霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期二 (修護)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#08 Dr.Reju-All PDRN 修護<br><small style="color:#718096;">(敏感換 #02 Dr.G 補骨脂酚)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(泛紅加塗 #12 維他命K霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期三 (抗老)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#04 QUALITY 1st A醇精華<br><small style="color:#2b6cb0;">(進階可換 #10 celimax 視黃醛)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(鬆弛可換 #11 RXme 緊緻霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期四 (深層修護)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#08 Dr.Reju-All PDRN 修護<br><small style="color:#718096;">(若白天未擦 #03 壬二酸可於此處擦)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(泛紅加塗 #12 維他命K霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期五 (抗老)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#04 QUALITY 1st A醇精華<br><small style="color:#2b6cb0;">(進階可換 #10 celimax 視黃醛)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(鬆弛可換 #11 RXme 緊緻霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期六 (修護)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#06 Torriden 玻尿酸精華<br><small style="color:#718096;">(極乾換 #13 WELLAGE 玻尿酸)</small></td>
+                        <td>#08 Dr.Reju-All PDRN 修護<br><small style="color:#718096;">(敏感換 #02 Dr.G 補骨脂酚)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜<br><small style="color:#718096;">(泛紅加塗 #12 維他命K霜)</small></td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-night">星期日 (清潔修護)</span></td>
+                        <td>#23 Torriden 潔顏乳 /<br>#24 獨島潔顏乳</td>
+                        <td>#21 beplain 綠豆泥膜<br><small style="color:#718096;">(敷3分鐘清毛孔吸油)</small></td>
+                        <td>敷片狀面膜<br><small style="color:#718096;">(#14 / #15 / #18 / #19 輪替)</small></td>
+                        <td>#01 Curél 潤浸保濕乳霜</td>
+                        <td><small style="color:#e53e3e;">(局部大痘點塗 #26 水楊酸凝膠)</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
